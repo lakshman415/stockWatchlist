@@ -1,0 +1,19 @@
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+
+# React
+/node_modules
+/build
+
+# IDE/Editor specific
+.idea/
+.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
