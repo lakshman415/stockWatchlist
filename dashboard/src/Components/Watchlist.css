@@ -1,0 +1,32 @@
+.watchlist-card {
+    margin: 10px;
+    width: 200px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+  }
+  
+
+  .watchlist-card .card-title {
+    font-size: 1.2rem;
+    width: 100%;
+    white-space: pre-line;
+    word-wrap: break-word;
+  }
+  .watchlist-card .card-text {
+    font-size: 1rem;
+  }
+  
+  .watchlist-card .btn {
+    margin-top: 10px;
+  }
+
+
+  .watchlist-card .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }

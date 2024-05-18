@@ -1,6 +1,8 @@
-import React from 'react';
+import React , { useState } from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import './TopCompanies.css';
+import Watchlist from './Watchlist';
+
 
 const IndianCompanies = [
   { name: 'Reliance Industries Limited', symbol: 'RELIANCE', price: '$150.00' },
@@ -57,37 +59,52 @@ const WorldwideCompanies = [
   { name: 'Exxon Mobil Corporation', symbol: 'XOM', price: '$100.00' },
 ];
 
-const StockButtons = ({ companies }) => {
+const StockButtons = ({ companies}) => {
+  
+  const [selectedSymbol, setSelectedSymbol] = useState(null); // Declare selectedSymbol state variable
+  const [watchlist, setWatchlist] = useState([]);
+
+
+  const handleCardClick = (symbol) => {
+    setSelectedSymbol(symbol);
+  };
+  const handleAddToWatchlist = (company) => {
+    setWatchlist([...watchlist, company]);
+  };
+  const handleRemoveFromWatchlist = (symbol) => {
+    setWatchlist(watchlist.filter((company) => company.symbol !== symbol));
+  };
+
   return (
-    <div className="marquee">
-      <div className="marquee-content">
-        {companies.map((company, index) => (
-          <Card key={index} className="company-card">
-            <Card.Body>
-              <Card.Title>{company.name}</Card.Title>
-              <Card.Text>
-                <strong>{company.symbol}</strong>
-              </Card.Text>
-              <Card.Text>
-                <small>{company.price}</small>
-              </Card.Text>
-              <Button variant="primary">Add to Watchlist</Button>
-            </Card.Body>
-          </Card>
-        ))}
-        {companies.map((company, index) => (
-          <Card key={index + companies.length} className="company-card">
-            <Card.Body>
-              <Card.Title>{company.name}</Card.Title>
-              <Card.Text>
-                <strong>{company.symbol}</strong>
-              </Card.Text>
-              <Card.Text>
-                <small>{company.price}</small>
-              </Card.Text>
-              <Button variant="primary">Add to Watchlist</Button>
-            </Card.Body>
-          </Card>
+    <div>
+      <div className="marquee">
+        <div className="marquee-content">
+          {companies.map((company, index) => (
+            <Card
+              key={index}
+              className={`company-card ${selectedSymbol === company.symbol ? 'selected' : ''}`}
+              onClick={() => handleCardClick(company.symbol)}
+            >
+              <Card.Body>
+                <Card.Title>{company.name}</Card.Title>
+                <Card.Text>
+                  <strong>{company.symbol}</strong>
+                </Card.Text>
+                <Card.Text>
+                  <small>{company.price}</small>
+                </Card.Text>
+                <Button variant="primary" onClick={() => handleAddToWatchlist(company)}>
+                  Add to Watchlist
+                </Button>
+              </Card.Body>
+            </Card>
+          ))}
+        </div>
+      </div>
+
+      <div className="watchlist">
+        {watchlist.map((company, index) => (
+          <Watchlist key={index} company={company} onRemove={handleRemoveFromWatchlist} />
         ))}
       </div>
     </div>
@@ -114,3 +131,5 @@ const TopCompanies = () => {
 };
 
 export default TopCompanies;
+
+

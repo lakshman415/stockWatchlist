@@ -10,8 +10,8 @@ const StockData = () => {
     const [lastRefreshed, setLastRefreshed] = useState('');
     const [timeZone, setTimeZone] = useState('');
     const [latestPrice, setLatestPrice] = useState('');
-    const [showWatchlist, setShowWatchlist] = useState(false);
-    const [watchlist, setWatchlist] = useState([]);
+    // const [showWatchlist, setShowWatchlist] = useState(false);
+    // const [watchlist, setWatchlist] = useState([]);
 
   useEffect(() => {
     const fetchStockData = async () => {
@@ -46,21 +46,21 @@ const StockData = () => {
   // Calculate the price range for the day
   const minPrice = Math.min(...formattedData.map((data) => data.low));
   const maxPrice = Math.max(...formattedData.map((data) => data.high));
-  const addToWatchlist = () => {
-    if (!showWatchlist) {
-      setShowWatchlist(true);
-    }
+  // const addToWatchlist = () => {
+  //   if (!showWatchlist) {
+  //     setShowWatchlist(true);
+  //   }
 
-    if (!watchlist.includes(symbol)) {
-      setWatchlist([...watchlist, symbol]);
-    } else {
-      alert(`${symbol} is already in the watchlist.`);
-    }
-  };
+  //   if (!watchlist.includes(symbol)) {
+  //     setWatchlist([...watchlist, symbol]);
+  //   } else {
+  //     alert(`${symbol} is already in the watchlist.`);
+  //   }
+  // };
 
   return (
     <div> 
-        <Container className="mt-4">
+        {/* <Container className="mt-4">
   {watchlist.length > 0 && <h2 className="text-center mb-4">WatchList</h2>}
   {showWatchlist && (
     <Row className="justify-content-left mt-3">
@@ -73,7 +73,7 @@ const StockData = () => {
       </Col>
     </Row>
   )}
-</Container>
+</Container> */}
 
     <Container className="mt-4">
       <Row className="justify-content-left">
@@ -87,11 +87,12 @@ const StockData = () => {
         </Col>
         <Col xs={12} md={2} className="text-right">
         <Button
-              variant="light"
+              variant="primary"
               size="lg"
               className="mb-2"
               style={{ marginRight: '10px' }}
-              onClick={addToWatchlist}
+              
+              
             >
               Add to Watchlist
             </Button>
